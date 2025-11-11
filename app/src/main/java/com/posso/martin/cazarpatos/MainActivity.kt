@@ -1,7 +1,6 @@
 package com.posso.martin.cazarpatos
 
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         var isValid = true
         
         // Validate email
-        if (!isValidEmail(email)) {
+        if (!LoginValidator.isValidEmail(email)) {
             emailInputLayout.error = getString(R.string.error_invalid_email)
             isValid = false
         } else {
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
         
         // Validate password (minimum 8 characters)
-        if (!isValidPassword(password)) {
+        if (!LoginValidator.isValidPassword(password)) {
             passwordInputLayout.error = getString(R.string.error_invalid_password)
             isValid = false
         } else {
@@ -65,13 +64,5 @@ class MainActivity : AppCompatActivity() {
             passwordInputLayout.error = null
             // TODO: Implement actual login logic here
         }
-    }
-    
-    private fun isValidEmail(email: String): Boolean {
-        return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-    
-    private fun isValidPassword(password: String): Boolean {
-        return password.length >= 8
     }
 }
